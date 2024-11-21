@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 
-const theme = ref('light')
+const theme = ref(localStorage.getItem('theme') ??'light')
 
 function onClick() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
+  localStorage.setItem('theme', theme.value)
 }
 </script>
 
@@ -34,7 +35,7 @@ function onClick() {
           elevation="24"
           border
           app
-          >2024 - SoloConnect</v-footer
+          >Copyright @ 2024 - SoloConnect | All Rights Reserved</v-footer
         >
       </v-parallax>
     </v-app>
