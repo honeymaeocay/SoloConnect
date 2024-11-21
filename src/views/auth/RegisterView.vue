@@ -26,26 +26,37 @@ function onClick() {
         <v-main>
           <v-container>
             <v-row>
-              <v-col cols="12" md="6" class="mx-auto pt-16">
-                <v-card class="mx-auto" prepend-icon="mdi-login" subtitle="Login" elevation="24">
+              <v-col cols="12" md="6" class="mx-auto">
+                <v-card
+                  class="mx-auto"
+                  prepend-icon="mdi-account-plus"
+                  subtitle="Register"
+                  elevation="24"
+                >
                   <template v-slot:title>
                     <span class="font-weight-black">SoloConnect</span>
                   </template>
 
                   <v-card-text class="bg-surface-light pt-4">
                     <v-form fast-fail @submit.prevent>
-                      <v-text-field
-                        label="Email"
-                        variant="outlined"
-                        prepend-inner-icon="mdi-email-outline"
-                      ></v-text-field>
+                      <v-text-field label="Firstname" variant="outlined"></v-text-field>
+
+                      <v-text-field label="Lastname" variant="outlined"></v-text-field>
+
+                      <v-text-field label="Address" variant="outlined"></v-text-field>
+
+                      <v-text-field label="Email" variant="outlined"></v-text-field>
 
                       <v-text-field
                         label="Password"
                         variant="outlined"
-                        prepend-inner-icon="mdi-lock-outline"
-                        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-                        :type="visible ? 'text' : 'password'"
+                        type="password"
+                      ></v-text-field>
+
+                      <v-text-field
+                        label="Password Confirmation"
+                        variant="outlined"
+                        type="password"
                       ></v-text-field>
 
                       <v-btn class="mt-2" type="submit" block>Submit</v-btn>
@@ -54,10 +65,8 @@ function onClick() {
                     <v-divider class="my-5"></v-divider>
 
                     <h5 class="text-center">
-                      Don't Have account?
-                      <RouterLink class="text-primary" to="/register"
-                        >Click here to Register</RouterLink
-                      >
+                      Already Have account?
+                      <RouterLink class="text-primary" to="/">Click here to Login</RouterLink>
                     </h5>
                   </v-card-text>
                 </v-card>
