@@ -7,7 +7,7 @@ const { mobile } = useDisplay()
 </script>
 
 <template>
-  <AppLayout>git 
+  <AppLayout>git
     <template #content>
       <v-row>
         <v-col cols="12" md="6" class="mx-auto pt-13">
@@ -31,7 +31,7 @@ const { mobile } = useDisplay()
 
               <h5 class="text-center">
                 Don't Have account?
-                <RouterLink class="text-primary" to="/register">Click here to Register</RouterLink>
+                <RouterLink class="text-amber-lighten-1" to="/register">Click here to Register</RouterLink>
               </h5>
             </v-card-text>
           </v-card>
