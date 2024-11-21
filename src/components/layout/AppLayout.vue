@@ -9,7 +9,7 @@ function onClick() {
 </script>
 
 <template>
-  <v-responsive class="border rounded">
+  <v-responsive>
     <v-app :theme="theme">
       <v-app-bar class="px-3" :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'">
         <v-spacer></v-spacer>
@@ -29,6 +29,7 @@ function onClick() {
           </v-container>
         </v-main>
         <v-footer
+          class="font-weight-bold"
           :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'"
           elevation="24"
           border
