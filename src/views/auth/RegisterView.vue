@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from '@/components/layout/AppLayout.vue'
+import RegisterForm from '@/components/auth/RegisterForm.vue'
 import { useDisplay } from 'vuetify'
 
 const { mobile } = useDisplay()
@@ -22,32 +23,9 @@ const { mobile } = useDisplay()
             </v-card-title>
 
             <v-card-text class="bg-surface-light pt-4">
-              <v-form fast-fail @submit.prevent>
-                <v-text-field label="Firstname" variant="outlined"></v-text-field>
+              <v-divider class="my-5"></v-divider>
 
-                <v-text-field label="Lastname" variant="outlined"></v-text-field>
-
-                <v-text-field label="Address" variant="outlined"></v-text-field>
-
-                <v-text-field label="Email Address" variant="outlined"></v-text-field>
-
-                <v-text-field label="Password" variant="outlined" type="password"></v-text-field>
-
-                <v-text-field
-                  label="Password Confirmation"
-                  variant="outlined"
-                  type="password"
-                ></v-text-field>
-
-                <v-btn
-                  class="mt-2"
-                  type="submit"
-                  block
-                  color="warning"
-                  prepend-icon="mdi-account-plus"
-                  >Register</v-btn
-                >
-              </v-form>
+              <RegisterForm></RegisterForm>
 
               <v-divider class="my-5"></v-divider>
 
