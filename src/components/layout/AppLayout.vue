@@ -1,0 +1,41 @@
+<script setup>
+import { ref } from 'vue'
+
+const theme = ref('light')
+
+function onClick() {
+  theme.value = theme.value === 'light' ? 'dark' : 'light'
+}
+</script>
+
+<template>
+  <v-responsive class="border rounded">
+    <v-app :theme="theme">
+      <v-app-bar class="px-3" :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'">
+        <v-spacer></v-spacer>
+
+        <v-btn
+          :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+          variant="elevated"
+          slim
+          @click="onClick"
+        ></v-btn>
+      </v-app-bar>
+
+      <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+        <v-main>
+          <v-container>
+            <slot name="content"></slot>
+          </v-container>
+        </v-main>
+        <v-footer
+          :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'"
+          elevation="24"
+          border
+          app
+          >2024 - SoloConnect</v-footer
+        >
+      </v-parallax>
+    </v-app>
+  </v-responsive>
+</template>
