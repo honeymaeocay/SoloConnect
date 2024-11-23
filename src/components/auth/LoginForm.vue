@@ -39,7 +39,7 @@ const onFormSubmit = () => {
       label="Password"
       prepend-inner-icon="mdi-lock-outline"
       :type="isPasswordVisible ? 'text' : 'password'"
-      :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+      :append-inner-icon="isPasswordVisible ? 'mdi-eye' : 'mdi-eye-off'"
       @click:append-inner="isPasswordVisible = !isPasswordVisible"
       :rules="[requiredValidator]"
     ></v-text-field>
