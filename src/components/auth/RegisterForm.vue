@@ -59,7 +59,7 @@ const onFormSubmit = () => {
       prepend-icon="mdi-lock"
       label="Password"
       :type="isPasswordVisible ? 'text' : 'password'"
-      :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+      :append-inner-icon="isPasswordVisible ? 'mdi-eye' : 'mdi-eye-off'"
       @click:append-inner="isPasswordVisible = !isPasswordVisible"
       :rules="[requiredValidator, passwordValidator]"
     ></v-text-field>
@@ -69,7 +69,7 @@ const onFormSubmit = () => {
       prepend-icon="mdi-lock"
       label="Password Confirmation"
       :type="isPasswordConfirmVisible ? 'text' : 'password'"
-      :append-inner-icon="isPasswordConfirmVisible ? 'mdi-eye-off' : 'mdi-eye'"
+      :append-inner-icon="isPasswordConfirmVisible ? 'mdi-eye' : 'mdi-eye-off'"
       @click:append-inner="isPasswordConfirmVisible = !isPasswordConfirmVisible"
       :rules="[
         requiredValidator,
@@ -81,7 +81,7 @@ const onFormSubmit = () => {
       class="mt-2"
       type="submit"
       block
-      color="amber-lighten-1"
+      color="warning"
       prepend-icon="mdi-account-plus"
       >Register</v-btn
     >
