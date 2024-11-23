@@ -81,7 +81,7 @@ const onFormSubmit = () => {
       class="mt-2"
       type="submit"
       block
-      color="text-amber-lighten-1"
+      color="amber-lighten-1"
       prepend-icon="mdi-account-plus"
       >Register</v-btn
     >
