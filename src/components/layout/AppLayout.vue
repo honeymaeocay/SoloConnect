@@ -29,6 +29,7 @@ function onClick() {
             <slot name="content"></slot>
           </v-container>
         </v-main>
+        
         <v-footer
           class="font-weight-bold"
           :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'"

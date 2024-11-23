@@ -8,35 +8,40 @@ const { mobile } = useDisplay()
 
 <template>
   <AppLayout>
-    <template #content
-      ><v-row>
-        <v-col cols="12" md="6" class="mx-auto">
-          <v-card class="mx-auto" elevation="24">
-            <v-card-title class="text-center">
-              <v-img
-                class="mx-auto"
-                src="/images/lb-icon.jpg"
-                :width="mobile ? '75%' : '25%'"
-              ></v-img>
-              <h3 class="font-weight-black">SoloConnect</h3>
-              <p>Registration Form</p>
-            </v-card-title>
+    <template #content>
+      <v-container fluid>
+        <v-row>
+          <v-col cols="12" lg="8" class="bg-surface-light h-screen" v-if="!mobile"></v-col>
+          <v-col cols="12" lg="4" :class="mobile ? '' : 'pt-16'">
+            <v-card class="mx-auto" elevation="0" max-width="600">
+              <v-card-title class="text-center">
+                <v-img
+                  class="mx-auto"
+                  src="/images/lb-icon.jpg"
+                  :width="mobile ? '75%' : '65%'"
+                ></v-img>
 
-            <v-card-text class="bg-surface-light pt-4">
-              <v-divider class="my-5"></v-divider>
+                <h3 class="font-weight-black mt-5">Registration</h3>
+              </v-card-title>
 
-              <RegisterForm></RegisterForm>
+              <v-card-text class="pt-4">
+                <v-divider class="my-5"></v-divider>
 
-              <v-divider class="my-5"></v-divider>
+                <RegisterForm></RegisterForm>
 
-              <h5 class="text-center">
-                Already Have account?
-                <RouterLink class="text-amber-lighten-1" to="/">Click here to Login</RouterLink>
-              </h5>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row></template
-    >
+                <v-divider class="my-5"></v-divider>
+
+                <h4 class="text-center">
+                  Already have account?
+                  <RouterLink class="text-red-darken-4 font-weight-black" to="/">
+                    Click here to Login
+                  </RouterLink>
+                </h4>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </template>
   </AppLayout>
 </template>
