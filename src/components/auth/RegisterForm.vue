@@ -37,7 +37,7 @@ const onFormSubmit = () => {
 <template>
   <v-form ref="refVForm" fast-fail @submit.prevent="onFormSubmit">
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col cols="12" sm="6">
         <v-text-field
           v-model="formData.firstname"
           label="Firstname"
@@ -47,7 +47,7 @@ const onFormSubmit = () => {
     </v-row>
 
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col cols="12" sm="6">
         <v-text-field
           v-model="formData.lastname"
           label="Lastname"
@@ -67,7 +67,7 @@ const onFormSubmit = () => {
     </v-row>
 
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col cols="12" sm="6">
         <v-text-field
           v-model="formData.password"
           prepend-icon="mdi-lock"
@@ -81,7 +81,7 @@ const onFormSubmit = () => {
     </v-row>
 
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col cols="12" sm="6">
         <v-text-field
           v-model="formData.password_confirmation"
           prepend-icon="mdi-lock"
@@ -97,7 +97,7 @@ const onFormSubmit = () => {
       </v-col>
     </v-row>
 
-    <v-btn class="mt-2" type="submit" block color="warning" prepend-icon="mdi-account-plus"
+    <v-btn class="mt-2" type="submit" block color="text-amber-lighten-1" prepend-icon="mdi-account-plus"
       >Register</v-btn
     >
   </v-form>
