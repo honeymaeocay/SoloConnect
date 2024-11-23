@@ -15,16 +15,14 @@ const formData = ref({
 })
 
 const onSubmit = () => {
-  // alert(formData.value.email)
+  alert(formData.value.email)
 }
 
 const onFormSubmit = () => {
   refVForm.value?.validate().then(({ valid }) => {
-    if(valid)
-    onSubmit()
+    if (valid) onSubmit()
   })
 }
-
 </script>
 
 <template>
