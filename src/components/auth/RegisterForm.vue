@@ -6,6 +6,8 @@ import {
   confirmedValidator,
 } from '@/utils/validators'
 import { ref } from 'vue'
+import AlertNotification from '@/components/common/AlertNotification.vue'
+import { supabase, formActionDefault } from '@/utils/supabase.js'
 
 const formDataDefault = {
   firstname: '',
@@ -18,13 +20,41 @@ const formDataDefault = {
 const formData = ref({
   ...formDataDefault,
 })
+const formAction = ref({
+  ...formActionDefault,
+})
 
 const isPasswordVisible = ref(false)
 const isPasswordConfirmVisible = ref(false)
 const refVForm = ref()
 
-const onSubmit = () => {
-  alert(formData.value.email)
+const onSubmit = async () => {
+  formAction.value = { ...formActionDefault }
+  formAction.value.formProcess = true
+
+  const { data, error } = await supabase.auth.signUp({
+    email: formData.value.email,
+    password: formData.value.password,
+    options: {
+      data: {
+        firstname: formData.value.firstname,
+        lasname: formData.value.lastname,
+      },
+    },
+  })
+
+  if (error) {
+    console.log(error)
+    formAction.value.formErrorMessage = error.message
+    formAction.value.formStatus = error.status
+  } else if (data) {
+    console.log(data)
+    formAction.value.formSucessMessage = 'Successfully Registered Account'
+    // Add here more actions
+    refVForm.value?.reset
+  }
+
+  formAction.value.formProcess = false
 }
 
 const onFormSubmit = () => {
@@ -35,7 +65,12 @@ const onFormSubmit = () => {
 </script>
 
 <template>
-  <v-form ref="refVForm" fast-fail @submit.prevent="onFormSubmit">
+  <AlertNotification
+    :form-success-message="formAction.formSucessMessage"
+    :form-error-message="formAction.formErrorMessage"
+  ></AlertNotification>
+
+  <v-form class="mt-5" ref="refVForm" fast-fail @submit.prevent="onFormSubmit">
     <v-text-field
       v-model="formData.firstname"
       label="Firstname"
@@ -56,7 +91,7 @@ const onFormSubmit = () => {
 
     <v-text-field
       v-model="formData.password"
-      prepend-icon="mdi-lock"
+      prepend-inner-icon="mdi-lock"
       label="Password"
       :type="isPasswordVisible ? 'text' : 'password'"
       :append-inner-icon="isPasswordVisible ? 'mdi-eye' : 'mdi-eye-off'"
@@ -66,7 +101,7 @@ const onFormSubmit = () => {
 
     <v-text-field
       v-model="formData.password_confirmation"
-      prepend-icon="mdi-lock"
+      prepend-inner-icon="mdi-lock"
       label="Password Confirmation"
       :type="isPasswordConfirmVisible ? 'text' : 'password'"
       :append-inner-icon="isPasswordConfirmVisible ? 'mdi-eye' : 'mdi-eye-off'"
@@ -83,6 +118,8 @@ const onFormSubmit = () => {
       block
       color="warning"
       prepend-icon="mdi-account-plus"
+      :disabled="formAction.formProcess"
+      :loading="formAction.formProcess"
       >Register</v-btn
     >
   </v-form>
