@@ -1,3 +1,11 @@
+<script setup>
+import { requiredValidator } from '@/utils/validators'
+import { formActionDefault } from '@/utils/supabase.js'
+import { useCodesStore } from '@/stores/codes'
+import { useDate } from 'vuetify'
+import { ref } from 'vue'
+</script>
+
 <template>
   <v-card title="Code Generator" subtitle="Generate Approval Codes" height="370px">
     <!-- eslint-disable vue/valid-v-slot -->
