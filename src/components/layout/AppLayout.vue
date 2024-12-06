@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const theme = ref(localStorage.getItem('theme') ??'light')
+const theme = ref(localStorage.getItem('theme') ?? 'light')
 
 function onClick() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
@@ -29,7 +29,7 @@ function onClick() {
             <slot name="content"></slot>
           </v-container>
         </v-main>
-        
+
         <v-footer
           class="font-weight-bold"
           :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'"
