@@ -51,7 +51,7 @@ const onSubmit = async () => {
     console.log(data)
     formAction.value.formSucessMessage = 'Successfully Registered Account'
     // Add here more actions
-    refVForm.value?.reset
+    refVForm.value?.reset()
   }
 
   formAction.value.formProcess = false
@@ -66,9 +66,30 @@ const onFormSubmit = () => {
 
 <template>
   <AlertNotification
-    :form-success-message="formAction.formSucessMessage"
+    :form-success-message="formAction.formSuccessMessage"
     :form-error-message="formAction.formErrorMessage"
   ></AlertNotification>
+
+  <v-alert
+    v-if="formAction.formSuccessMessage"
+    :text="formAction.formSuccessMessage"
+    title="Success!"
+    type="success"
+    variant="tonal"
+    density="compact"
+    border="start"
+    closable
+  ></v-alert>
+  <v-alert
+    v-if="formAction.formErrorMessage"
+    :text="formAction.formErrorMessage"
+    title="Ooops! Invalid Account. Please Try Again."
+    type="error"
+    variant="tonal"
+    density="compact"
+    border="start"
+    closable
+  ></v-alert>
 
   <v-form class="mt-5" ref="refVForm" fast-fail @submit.prevent="onFormSubmit">
     <v-text-field
