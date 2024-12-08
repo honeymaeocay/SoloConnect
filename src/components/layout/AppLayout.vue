@@ -1,7 +1,7 @@
 <script setup>
 import { isAuthenticated } from '@/utils/supabase'
 import ProfileHeader from './ProfileHeader.vue'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 
 const props = defineProps(['isWithAppBarNavIcon'])
