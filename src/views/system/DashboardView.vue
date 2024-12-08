@@ -1,0 +1,24 @@
+<script setup>
+import AppLayout from '@/components/layout/AppLayout.vue'
+import { ref } from 'vue'
+import { useDisplay } from 'vuetify'
+
+// Utilize pre-defined vue functions
+const { mobile } = useDisplay()
+
+const isDrawerVisible = ref(mobile.value ? false : true)
+</script>
+
+<template>
+  <AppLayout
+    :is-with-app-bar-nav-icon="true"
+    @is-drawer-visible="isDrawerVisible = !isDrawerVisible"
+  >
+    <template #navigation>
+      <SideNavigation :is-drawer-visible="isDrawerVisible"></SideNavigation>
+    </template>
+    <template #content>
+      <v-container></v-container>
+    </template>
+  </AppLayout>
+</template>

@@ -1,11 +1,11 @@
 <script setup>
-const props = defineProps(['formAction.formSucessMessage', 'formAction.formErrorMessage'])
+const props = defineProps(['formAction.formSuccessMessage', 'formAction.formErrorMessage'])
 </script>
 
 <template>
   <v-alert
-    v-if="props.formSucessMessage"
-    :text="props.formSucessMessage"
+    v-if="props.formSuccessMessage"
+    :text="props.formSuccessMessage"
     title="Success!"
     type="success"
     variant="tonal"
