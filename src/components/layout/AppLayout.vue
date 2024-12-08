@@ -1,12 +1,41 @@
 <script setup>
-import { ref } from 'vue'
+import { isAuthenticated } from '@/utils/supabase'
+import ProfileHeader from './ProfileHeader.vue'
+import { onMounted, ref } from 'vue'
+import { useDisplay } from 'vuetify'
 
-const theme = ref(localStorage.getItem('theme') ??'light')
+const props = defineProps(['isWithAppBarNavIcon'])
 
-function onClick() {
+const emit = defineEmits(['isDrawerVisible', 'theme'])
+
+// Utilize pre-defined vue functions
+const { mobile } = useDisplay()
+
+// Load Variables
+const isLoggedIn = ref(false)
+const isMobileLogged = ref(false)
+const isDesktop = ref(false)
+const theme = ref(localStorage.getItem('theme') ?? 'light')
+
+//  Toggle Theme
+function onToggleTheme() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
   localStorage.setItem('theme', theme.value)
+  emit('theme', theme.value)
 }
+
+// Get Authentication status from supabase
+const getLoggedStatus = async () => {
+  isLoggedIn.value = await isAuthenticated()
+
+  isMobileLogged.value = mobile.value && isLoggedIn.value
+  isDesktop.value = !mobile.value && (isLoggedIn.value || !isLoggedIn.value)
+}
+
+// Load Functions during component rendering
+onMounted(() => {
+  getLoggedStatus()
+})
 </script>
 
 <template>
@@ -21,6 +50,8 @@ function onClick() {
           slim
           @click="onClick"
         ></v-btn>
+
+        <ProfileHeader v-if="isLoggedIn"></ProfileHeader>
       </v-app-bar>
 
       <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
@@ -29,7 +60,7 @@ function onClick() {
             <slot name="content"></slot>
           </v-container>
         </v-main>
-        
+
         <v-footer
           class="font-weight-bold"
           :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'"
