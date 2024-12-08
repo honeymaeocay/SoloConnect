@@ -18,29 +18,7 @@ const isDrawerVisible = ref(mobile.value ? false : true)
       <SideNavigation :is-drawer-visible="isDrawerVisible"></SideNavigation>
     </template>
     <template #content>
-      <v-container fluid>
-        <v-row>
-          <v-col cols="12">
-            <WelcomeWidget :theme="theme"></WelcomeWidget>
-          </v-col>
-
-          <v-col cols="12" md="8">
-            <ProductsWidget :theme="theme"></ProductsWidget>
-          </v-col>
-
-          <v-col cols="12" md="4">
-            <v-row>
-              <v-col cols="12" v-if="isSuperAdmin">
-                <CodeGeneratorWidget></CodeGeneratorWidget>
-              </v-col>
-
-              <v-col cols="12">
-                <MapWidget></MapWidget>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
+      <v-container></v-container>
     </template>
   </AppLayout>
 </template>
