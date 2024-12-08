@@ -4,7 +4,7 @@ import ProfileHeader from './ProfileHeader.vue'
 import { onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 
-// const props = defineProps(['isWithAppBarNavIcon'])
+const props = defineProps(['isWithAppBarNavIcon'])
 
 const emit = defineEmits(['isDrawerVisible', 'theme'])
 
@@ -41,8 +41,72 @@ onMounted(() => {
 <template>
   <v-responsive>
     <v-app :theme="theme">
+      <v-app-bar
+        class="px-3"
+        :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'"
+        border
+      >
+        <v-app-bar-nav-icon
+          v-if="props.isWithAppBarNavIcon"
+          icon="mdi-menu"
+          :theme="theme"
+          @click="emit('isDrawerVisible')"
+        >
+        </v-app-bar-nav-icon>
+
+        <v-app-bar-title>
+          <v-img src="/images/lb-icon.jpg" :width="xs ? '100%' : sm ? '40%' : '14%'"></v-img>
+        </v-app-bar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn
+          class="me-2"
+          :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+          variant="elevated"
+          slim
+          @click="onToggleTheme"
+        ></v-btn>
+
+        <ProfileHeader v-if="isLoggedIn"></ProfileHeader>
+      </v-app-bar>
+
+      <slot name="navigation"></slot>
+
+      <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+        <v-main>
+          <slot name="content"></slot>
+        </v-main>
+
+        <v-footer
+          v-if="!isMobileLogged || isDesktop"
+          class="font-weight-bold"
+          :class="mobile ? 'text-caption' : ''"
+          :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'"
+          border
+          app
+        >
+          <div :class="mobile ? 'w-100 text-center' : ''">
+            Copyright @ 2024 - SoloConnect | All Rights Reserved
+          </div>
+        </v-footer>
+
+        <BottomNavigation v-else-if="isMobileLogged" :theme="theme"></BottomNavigation>
+      </v-parallax>
+    </v-app>
+  </v-responsive>
+  <!-- <v-responsive>
+    <v-app :theme="theme">
       <v-app-bar class="px-3" :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'">
         <v-spacer></v-spacer>
+
+        <v-app-bar-nav-icon
+          v-if="props.isWithAppBarNavIcon"
+          icon="mdi-menu"
+          :theme="theme"
+          @click="emit('isDrawerVisible')"
+        >
+        </v-app-bar-nav-icon>
 
         <v-btn
           :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
@@ -71,5 +135,5 @@ onMounted(() => {
         >
       </v-parallax>
     </v-app>
-  </v-responsive>
+  </v-responsive> -->
 </template>
