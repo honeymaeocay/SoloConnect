@@ -6,7 +6,7 @@ import { useDisplay } from 'vuetify'
 
 // const props = defineProps(['isWithAppBarNavIcon'])
 
-// const emit = defineEmits(['isDrawerVisible', 'theme'])
+const emit = defineEmits(['isDrawerVisible', 'theme'])
 
 // Utilize pre-defined vue functions
 const { mobile } = useDisplay()
@@ -18,11 +18,11 @@ const isDesktop = ref(false)
 const theme = ref(localStorage.getItem('theme') ?? 'light')
 
 //  Toggle Theme
-// function onToggleTheme() {
-//   theme.value = theme.value === 'light' ? 'dark' : 'light'
-//   localStorage.setItem('theme', theme.value)
-//   emit('theme', theme.value)
-// }
+function onToggleTheme() {
+  theme.value = theme.value === 'light' ? 'dark' : 'light'
+  localStorage.setItem('theme', theme.value)
+  emit('theme', theme.value)
+}
 
 // Get Authentication status from supabase
 const getLoggedStatus = async () => {
@@ -48,7 +48,7 @@ onMounted(() => {
           :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
           variant="elevated"
           slim
-          @click="onClick"
+          @click="onToggleTheme"
         ></v-btn>
 
         <ProfileHeader v-if="isLoggedIn"></ProfileHeader>
