@@ -50,9 +50,10 @@ const onSubmit = async () => {
     formAction.value.formStatus = error.status
   } else if (data) {
     console.log(data)
-    formAction.value.formSucessMessage = 'Successfully Registered Account'
+    formAction.value.formSuccessMessage = 'Successfully Registered Account'
     // Add here more actions
     refVForm.value?.reset()
+    formData.value = { ...formDataDefault}
   }
 
   formAction.value.formProcess = false

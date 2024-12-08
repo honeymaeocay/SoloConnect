@@ -4,7 +4,7 @@ import ProfileHeader from './ProfileHeader.vue'
 import { onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 
-const props = defineProps(['isWithAppBarNavIcon'])
+// const props = defineProps(['isWithAppBarNavIcon'])
 
 const emit = defineEmits(['isDrawerVisible', 'theme'])
 
@@ -48,7 +48,7 @@ onMounted(() => {
           :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
           variant="elevated"
           slim
-          @click="onClick"
+          @click="onToggleTheme"
         ></v-btn>
 
         <ProfileHeader v-if="isLoggedIn"></ProfileHeader>
