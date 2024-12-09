@@ -6,7 +6,7 @@ import {
   menuItemsNav3,
   menuItemsNav4,
   menuItemsNav5,
-} from './sideNavigation'
+} from '@/components/layout/navigation/sideNavigation'
 import { useDisplay } from 'vuetify'
 import { ref, watch, onMounted } from 'vue'
 import { useAuthUserStore } from '@/stores/authUser'
