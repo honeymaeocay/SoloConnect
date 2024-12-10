@@ -9,15 +9,15 @@ import {
 } from '@/components/layout/navigation/sideNavigation'
 import { useDisplay } from 'vuetify'
 import { ref, watch, onMounted } from 'vue'
-import { useAuthUserStore } from '@/stores/authUser'
+// import { useAuthUserStore } from '@/stores/authUser'
 
 const props = defineProps(['isDrawerVisible'])
 
 // Utilize pre-defined vue functions
 const { mobile } = useDisplay()
 
-// Use Pinia Store
-const authStore = useAuthUserStore()
+// // Use Pinia Store
+// const authStore = useAuthUserStore()
 
 // Load Variables
 const noAccessPages = ref([])
@@ -38,7 +38,7 @@ watch(
 
 // Filter pages base on role
 const onFilterPages = async () => {
-  if (authStore.userRole === 'Super Administrator') return
+  // if (authStore.userRole === 'Super Administrator') return
 
   const menuItems = [
     { items: editableMenuItemsNav1, title: mainNav[0][0] },
@@ -49,7 +49,7 @@ const onFilterPages = async () => {
   ]
 
   menuItems.forEach(({ items, title }) => {
-    items.value = items.value.filter((item) => authStore.authPages.includes(item[3]))
+    // items.value = items.value.filter((item) => authStore.authPages.includes(item[3]))
     if (items.value.length === 0) noAccessPages.value.push(title)
   })
 }

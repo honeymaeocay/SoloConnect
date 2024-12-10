@@ -13,6 +13,7 @@ import { useRouter } from 'vue-router'
 // Load pre-defined vue functions
 const router = useRouter()
 
+//Load VARIABLES
 const formDataDefault = {
   firstname: '',
   lastname: '',
@@ -20,7 +21,6 @@ const formDataDefault = {
   password: '',
   password_confirmation: '',
 }
-
 const formData = ref({
   ...formDataDefault,
 })
@@ -46,6 +46,7 @@ const onSubmit = async () => {
       data: {
         firstname: formData.value.firstname,
         lasname: formData.value.lastname,
+        email: formData.value.email
         // is_admin: true, //Just turn to true if admin account
         //role: 'Admin' // if role based
       },
@@ -64,7 +65,7 @@ const onSubmit = async () => {
     // Add success message
     formAction.value.formSuccessMessage = 'Successfully Registered Account'
     // Add here more actions
-    router.replace('/dashboard')
+    router.replace('/system/dashboard')
   }
 
   // Reset form
@@ -87,27 +88,6 @@ const onFormSubmit = () => {
     :form-success-message="formAction.formSuccessMessage"
     :form-error-message="formAction.formErrorMessage"
   ></AlertNotification>
-
-  <v-alert
-    v-if="formAction.formSuccessMessage"
-    :text="formAction.formSuccessMessage"
-    title="Success!"
-    type="success"
-    variant="tonal"
-    density="compact"
-    border="start"
-    closable
-  ></v-alert>
-  <v-alert
-    v-if="formAction.formErrorMessage"
-    :text="formAction.formErrorMessage"
-    title="Ooops! Invalid Account. Please Try Again."
-    type="error"
-    variant="tonal"
-    density="compact"
-    border="start"
-    closable
-  ></v-alert>
 
   <v-form class="mt-5" ref="refVForm" fast-fail @submit.prevent="onFormSubmit">
     <v-text-field

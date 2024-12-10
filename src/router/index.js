@@ -6,9 +6,10 @@ import DashboardView from '@/views/system/DashboardView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Auth Pages
     {
       path: '/',
-      name: 'login',
+      name: 'home',
       component: LoginView,
     },
     {
@@ -16,8 +17,10 @@ const router = createRouter({
       name: 'register',
       component: RegisterView,
     },
+
+    // System Pages
     {
-    path: '/dashboard',
+    path: '/system/dashboard',
     name: 'dashboard',
     component: DashboardView,
     },

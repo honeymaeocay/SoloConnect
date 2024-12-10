@@ -1,11 +1,11 @@
 <script setup>
 import { isAuthenticated } from '@/utils/supabase'
-import ProfileHeader from './ProfileHeader.vue'
 import { onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 
-const props = defineProps(['isWithAppBarNavIcon'])
+import ProfileHeader from '@/components/layout/ProfileHeader.vue'
 
+const props = defineProps(['isWithAppBarNavIcon'])
 const emit = defineEmits(['isDrawerVisible', 'theme'])
 
 // Utilize pre-defined vue functions
@@ -55,7 +55,7 @@ onMounted(() => {
         </v-app-bar-nav-icon>
 
         <!-- <v-app-bar-title>
-          <v-img src="/images/lb-icon.jpg" :width="xs ? '100%' : sm ? '40%' : '14%'"></v-img>
+          <v-img src="/images/logo-shop.png" :width="xs ? '100%' : sm ? '40%' : '14%'"></v-img>
         </v-app-bar-title> -->
 
         <v-spacer></v-spacer>
@@ -90,12 +90,14 @@ onMounted(() => {
             Copyright @ 2024 - SoloConnect | All Rights Reserved
           </div>
         </v-footer>
-
-        <BottomNavigation v-else-if="isMobileLogged" :theme="theme"></BottomNavigation>
       </v-parallax>
+
+      <!-- <BottomNavigation v-else-if="isMobileLogged" :theme="theme"></BottomNavigation> -->
     </v-app>
   </v-responsive>
-  <!-- <v-responsive>
+</template>
+
+<!-- <v-responsive>
     <v-app :theme="theme">
       <v-app-bar class="px-3" :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'">
         <v-spacer></v-spacer>
@@ -136,4 +138,3 @@ onMounted(() => {
       </v-parallax>
     </v-app>
   </v-responsive> -->
-</template>
