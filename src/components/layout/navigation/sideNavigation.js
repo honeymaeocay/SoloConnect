@@ -1,10 +1,9 @@
 // 👉 Main Navigation; Title, Icon
 export const mainNav = [
-  ['User Management', 'mdi-account-box-multiple'],
-  ['Product Management', 'mdi-clipboard-list'],
-  ['Inventory', 'mdi-invoice-list'],
-  ['Expenses Management', 'mdi-cash-register'],
-  ['Reporting', 'mdi-file-chart']
+  ['User Management', 'mdi-account-badge-outline'],
+  ['Form', 'mdi-form-select'],
+  ['Benefits', 'mdi-list-box-outline'],
+  ['About us', 'mdi-account-badge-outline'],
 ]
 
 // 👉 Sub Navigations; Title, Icon, Subtitle, Redirect Path
@@ -23,10 +22,4 @@ export const menuItemsNav3 = [
 ]
 export const menuItemsNav4 = [
   ['Expenditures', 'mdi-cash-remove', 'Tally and Manage Expenses', '/expenses']
-]
-export const menuItemsNav5 = [
-  ['Stocks', 'mdi-poll', 'Stocks of Products Report', '/reports/stocks'],
-  ['Sales', 'mdi-sale', 'Sold Products Report', '/reports/sales'],
-  ['Expenses', 'mdi-cash-multiple', 'Expenditures Report', '/reports/expenses']
-  // ['Balance Sheet', 'mdi-scale-balance', '', '/reports/balance'],
 ]
