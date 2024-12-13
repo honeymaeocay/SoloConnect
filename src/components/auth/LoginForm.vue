@@ -11,22 +11,20 @@ const router = useRouter()
 // Load Variables
 const formDataDefault = {
   email: '',
-  password: '',
+  password: ''
 }
 const formData = ref({
-  ...formDataDefault,
+  ...formDataDefault
 })
 const formAction = ref({
-  ...formActionDefault,
+  ...formActionDefault
 })
 const isPasswordVisible = ref(false)
 const refVForm = ref()
 
 const onSubmit = async () => {
   // Reset Form Action utils; Turn on processing at the same time
-  formAction.value = { ...formActionDefault }
-  // Turn on processing
-  formAction.value.formProcess = true
+  formAction.value = { ...formActionDefault, formProcess: true }
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email: formData.value.email,
