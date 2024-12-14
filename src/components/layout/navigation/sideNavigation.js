@@ -8,18 +8,15 @@ export const mainNav = [
 
 // 👉 Sub Navigations; Title, Icon, Subtitle, Redirect Path
 export const menuItemsNav1 = [
-  ['List of Branches', 'mdi-store', '', '/manage/branches'],
   ['User Roles', 'mdi-tag-multiple', '', '/manage/user/roles'],
-  ['Users Management', 'mdi-account-multiple', '', '/manage/users']
 ]
 export const menuItemsNav2 = [
-  ['Product Information', 'mdi-information-box', 'Add and Manage Products', '/products']
+  ['Form', 'mdi-form-textarea'],
 ]
 export const menuItemsNav3 = [
-  ['Stock In', 'mdi-tray-arrow-down', 'Add Stocks on Products', '/inventory/stockin'],
-  ['Stock Weight', 'mdi-weight-kilogram', 'Track Weight of Products', '/inventory/weight'],
-  ['Sales', 'mdi-tray-arrow-up', 'Sell Products', '/inventory/sales']
+  ['Benefits', 'mdi-tray-arrow-down'],
+
 ]
 export const menuItemsNav4 = [
-  ['Expenditures', 'mdi-cash-remove', 'Tally and Manage Expenses', '/expenses']
+  ['About', 'mdi-account-box-outline']
 ]
