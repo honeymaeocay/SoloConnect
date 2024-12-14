@@ -8,7 +8,7 @@ const { mobile } = useDisplay()
 
 <template>
   <AppLayout
-    >git
+    >g
     <template #content>
       <v-container fluid>
         <v-row>

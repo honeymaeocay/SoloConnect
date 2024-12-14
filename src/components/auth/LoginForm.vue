@@ -1,21 +1,51 @@
 <script setup>
+import AlertNotification from '@/components/common/AlertNotification.vue'
+import { formActionDefault, supabase } from '@/utils/supabase'
 import { requiredValidator, emailValidator } from '@/utils/validators'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+// Utilize pre-defined vue functions
+const router = useRouter()
+
+// Load Variables
+const formDataDefault = {
+  email: '',
+  password: ''
+}
+const formData = ref({
+  ...formDataDefault
+})
+const formAction = ref({
+  ...formActionDefault
+})
 const isPasswordVisible = ref(false)
 const refVForm = ref()
 
-const formDataDefault = {
-  email: '',
-  password: '',
-}
+const onSubmit = async () => {
+  // Reset Form Action utils; Turn on processing at the same time
+  formAction.value = { ...formActionDefault, formProcess: true }
 
-const formData = ref({
-  ...formDataDefault,
-})
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: formData.value.email,
+    password: formData.value.password
+  })
 
-const onSubmit = () => {
-  alert(formData.value.email)
+  if (error) {
+    // Add Error Message and Status Code
+    formAction.value.formErrorMessage = error.message
+    formAction.value.formStatus = error.status
+  } else if (data) {
+    // Add Success Message
+    formAction.value.formSuccessMessage = 'Successfully Logged Account.'
+    // Redirect Acct to Dashboard
+    router.replace('/system/dashboard')
+  }
+
+  // Reset Form
+  refVForm.value?.reset()
+  // Turn off processing
+  formAction.value.formProcess = false
 }
 
 const onFormSubmit = () => {
@@ -26,24 +56,45 @@ const onFormSubmit = () => {
 </script>
 
 <template>
-  <v-form ref="refVForm" fast-fail @submit.prevent="onFormSubmit">
-    <v-text-field
-      v-model="formData.email"
-      label="Email"
-      prepend-inner-icon="mdi-email-outline"
-      :rules="[requiredValidator, emailValidator]"
-    ></v-text-field>
+  <AlertNotification
+    :form-success-message="formAction.formSuccessMessage"
+    :form-error-message="formAction.formErrorMessage"
+  ></AlertNotification>
 
-    <v-text-field
-      v-model="formData.password"
-      label="Password"
-      prepend-inner-icon="mdi-lock-outline"
-      :type="isPasswordVisible ? 'text' : 'password'"
-      :append-inner-icon="isPasswordVisible ? 'mdi-eye' : 'mdi-eye-off'"
-      @click:append-inner="isPasswordVisible = !isPasswordVisible"
-      :rules="[requiredValidator]"
-    ></v-text-field>
+  <v-form ref="refVForm" @submit.prevent="onFormSubmit">
+    <v-row dense>
+      <v-col cols="12">
+        <v-text-field
+          v-model="formData.email"
+          label="Email"
+          prepend-inner-icon="mdi-email-outline"
+          :rules="[requiredValidator, emailValidator]"
+        ></v-text-field>
+      </v-col>
 
-    <v-btn class="mt-2" type="submit" block color="warning" prepend-icon="mdi-login">Login</v-btn>
+      <v-col cols="12">
+        <v-text-field
+          v-model="formData.password"
+          prepend-inner-icon="mdi-lock-outline"
+          label="Password"
+          :type="isPasswordVisible ? 'text' : 'password'"
+          :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+          @click:append-inner="isPasswordVisible = !isPasswordVisible"
+          :rules="[requiredValidator]"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+
+    <v-btn
+      class="mt-2"
+      type="submit"
+      color="warning"
+      prepend-icon="mdi-login"
+      :disabled="formAction.formProcess"
+      :loading="formAction.formProcess"
+      block
+    >
+      Login
+    </v-btn>
   </v-form>
 </template>

@@ -1,15 +1,18 @@
 <script setup>
-import { isAuthenticated } from '@/utils/supabase'
-import ProfileHeader from './ProfileHeader.vue'
+import BottomNavigation from './navigation/BottomNavigation.vue';
 import { onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
+import ProfileHeader from '@/components/layout/ProfileHeader.vue'
+import { useAuthUserStore } from '@/stores/authUser';
 
 const props = defineProps(['isWithAppBarNavIcon'])
-
 const emit = defineEmits(['isDrawerVisible', 'theme'])
 
 // Utilize pre-defined vue functions
-const { mobile } = useDisplay()
+const { xs, sm, mobile } = useDisplay()
+
+// Use Pinia Store
+const authStore = useAuthUserStore()
 
 // Load Variables
 const isLoggedIn = ref(false)
@@ -26,7 +29,7 @@ function onToggleTheme() {
 
 // Get Authentication status from supabase
 const getLoggedStatus = async () => {
-  isLoggedIn.value = await isAuthenticated()
+  isLoggedIn.value = await authStore.isAuthenticated()
 
   isMobileLogged.value = mobile.value && isLoggedIn.value
   isDesktop.value = !mobile.value && (isLoggedIn.value || !isLoggedIn.value)
@@ -54,9 +57,9 @@ onMounted(() => {
         >
         </v-app-bar-nav-icon>
 
-        <!-- <v-app-bar-title>
+        <v-app-bar-title>
           <v-img src="/images/lb-icon.jpg" :width="xs ? '100%' : sm ? '40%' : '14%'"></v-img>
-        </v-app-bar-title> -->
+        </v-app-bar-title>
 
         <v-spacer></v-spacer>
 
@@ -90,12 +93,14 @@ onMounted(() => {
             Copyright @ 2024 - SoloConnect | All Rights Reserved
           </div>
         </v-footer>
-
         <BottomNavigation v-else-if="isMobileLogged" :theme="theme"></BottomNavigation>
       </v-parallax>
+
     </v-app>
   </v-responsive>
-  <!-- <v-responsive>
+</template>
+
+<!-- <v-responsive>
     <v-app :theme="theme">
       <v-app-bar class="px-3" :color="theme === 'light' ? 'amber-lighten-1' : 'yellow-darken-3'">
         <v-spacer></v-spacer>
@@ -136,4 +141,3 @@ onMounted(() => {
       </v-parallax>
     </v-app>
   </v-responsive> -->
-</template>
