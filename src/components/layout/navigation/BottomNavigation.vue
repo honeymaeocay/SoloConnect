@@ -22,7 +22,7 @@ const onFilterPages = (path) => {
     grow
     active
   >
-    <v-btn to="/dashboard">
+    <v-btn to="/system/dashboard">
       <v-icon>mdi-view-dashboard</v-icon>
       Dashboard
     </v-btn>

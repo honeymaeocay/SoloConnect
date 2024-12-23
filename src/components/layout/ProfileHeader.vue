@@ -52,7 +52,7 @@ const onLogout = async () => {
 
         <v-avatar v-else color="orange-darken-3" size="large">
           <span class="text-h5">
-            {{ getAvatarText(authStore.userData.firstname + ' ' ) }}
+            {{ getAvatarText(authStore.userData.firstname + ' ' + authStore.userData.lastname) }}
           </span>
         </v-avatar>
       </v-btn>
@@ -77,7 +77,7 @@ const onLogout = async () => {
               <v-avatar v-else color="orange-darken-3" size="large">
                 <span class="text-h5">
                   {{
-                    getAvatarText(authStore.userData.firstname + ' ')
+                    getAvatarText(authStore.userData.firstname + ' ' + authStore.userData.lastname)
                   }}
                 </span>
               </v-avatar>
