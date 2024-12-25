@@ -1,14 +1,14 @@
 <script setup>
-import { useAuthUserStore } from '@/stores/authUser'
+// import { useAuthUserStore } from '@/stores/authUser'
 import { useDisplay } from 'vuetify'
 
-const props = defineProps(['theme'])
+// const props = defineProps(['theme'])
 
 // Utilize pre-defined vue functions
 const { mdAndDown } = useDisplay()
 
-// Use Pinia Store
-const authStore = useAuthUserStore()
+// // Use Pinia Store
+// const authStore = useAuthUserStore()
 </script>
 
 <template>
@@ -23,27 +23,24 @@ const authStore = useAuthUserStore()
       </span>
     </template>
 
-    <template #subtitle>
+    <!-- <template #subtitle>
       <p class="ms-4 text-wrap">View product inventory level and other administrative widgets.</p>
-    </template>
+    </template> -->
 
     <v-divider class="my-3" thickness="2"></v-divider>
 
     <v-card-text>
       <v-row>
         <v-col cols="12" sm="4" class="d-flex align-center">
-          <v-img
-            :src="props.theme == 'light' ? '/images/logo-shop.png' : '/images/logo-shop-dark.png'"
-            :width="mdAndDown ? '80%' : '100%'"
-          ></v-img>
+          <v-img src="/images/lb-icon.jpg" :width="mdAndDown ? '80%' : '100%'"></v-img>
         </v-col>
 
         <v-col cols="12" sm="8">
           <h2 class="mb-5">
             Welcome Aboard,
-            <span class="font-weight-black">
+            <!-- <span class="font-weight-black">
               {{ authStore.userData.firstname + ' ' + authStore.userData.lastname }}!
-            </span>
+            </span> -->
           </h2>
 
           <p class="text-justify">
@@ -55,6 +52,7 @@ const authStore = useAuthUserStore()
             community for solo parents.
           </p>
         </v-col>
+        
       </v-row>
     </v-card-text>
   </v-card>
