@@ -2,6 +2,7 @@
 import AppLayout from '@/components/layout/AppLayout.vue'
 import SideNavigation from '@/components/layout/navigation/SideNavigation.vue'
 // import WelcomeWidget from '@/components/system/dashboard/WelcomeWidget.vue'
+
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify'
 

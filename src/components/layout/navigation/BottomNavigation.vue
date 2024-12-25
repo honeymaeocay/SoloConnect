@@ -27,12 +27,12 @@ const onFilterPages = (path) => {
       Dashboard
     </v-btn>
 
-    <v-btn v-if="onFilterPages('/inventory/sales')" to="/inventory/sales">
+    <v-btn v-if="onFilterPages('/system/form')" to="/system/forms">
       <v-icon>mdi-tray-arrow-up</v-icon>
       Form
     </v-btn>
 
-    <v-btn v-if="onFilterPages('/reports/sales')" to="/reports/sales">
+    <v-btn v-if="onFilterPages('/system/benefits')" to="/system/benefits">
       <v-icon>mdi-sale</v-icon>
       Benefits
     </v-btn>

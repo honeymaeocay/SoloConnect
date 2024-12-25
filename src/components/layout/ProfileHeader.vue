@@ -13,7 +13,7 @@ const authStore = useAuthUserStore()
 
 // Load Variables
 const formAction = ref({
-  ...formActionDefault
+  ...formActionDefault,
 })
 
 // Logout Functionality
@@ -63,7 +63,7 @@ const onLogout = async () => {
         <v-list>
           <v-list-item
             :subtitle="authStore.userData.email"
-            :title="authStore.userData.firstname + ' '"
+            :title="authStore.userData.firstname + ' ' + authStore.userData.lastname"
           >
             <template #prepend>
               <v-avatar

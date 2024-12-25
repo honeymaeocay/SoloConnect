@@ -45,7 +45,7 @@ const onSubmit = async () => {
     options: {
       data: {
         firstname: formData.value.firstname,
-        lasname: formData.value.lastname,
+        lastname: formData.value.lastname,
         email: formData.value.email
         // is_admin: true, //Just turn to true if admin account
         //role: 'Admin' // if role based
