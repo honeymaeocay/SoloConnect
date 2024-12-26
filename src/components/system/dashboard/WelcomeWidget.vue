@@ -37,7 +37,7 @@ const { mdAndDown } = useDisplay()
 
         <v-col cols="12" sm="8">
           <h2 class="mb-5">
-            Welcome Aboard,
+            Welcome Aboard !!
             <!-- <span class="font-weight-black">
               {{ authStore.userData.firstname + ' ' + authStore.userData.lastname }}!
             </span> -->
@@ -52,7 +52,7 @@ const { mdAndDown } = useDisplay()
             community for solo parents.
           </p>
         </v-col>
-        
+
       </v-row>
     </v-card-text>
   </v-card>

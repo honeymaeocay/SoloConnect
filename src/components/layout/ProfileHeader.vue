@@ -1,8 +1,8 @@
 <script setup>
-import { supabase, formActionDefault } from '@/utils/supabase'
+import { supabase, formActionDefault, getUserInformation } from '@/utils/supabase'
 import { getAvatarText } from '@/utils/helpers'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useAuthUserStore } from '@/stores/authUser'
 
 // Utilize pre-defined vue functions
@@ -14,6 +14,13 @@ const authStore = useAuthUserStore()
 // Load Variables
 const formAction = ref({
   ...formActionDefault,
+})
+
+// Load Variables
+const userData = ref({
+  email: '',
+  fullname: '',
+  initials: '',
 })
 
 // Logout Functionality
@@ -35,6 +42,19 @@ const onLogout = async () => {
   }, 2500)
   // Redirect to homepage
   router.replace('/')
+
+  //Getting User Information Functionality
+  const getUser = async () => {
+    const userMetadata = await getUserInformation()
+
+    userData.value.email = userMetadata.email
+    userData.value.fullname = userMetadata.firstname + ' ' + userMetadata.lastname
+    userData.value.initials = getAvatarText(userData.value.fullname)
+  }
+  // Load to Functions during component rendering
+  onMounted(() => {
+    getUser()
+  })
 }
 </script>
 
