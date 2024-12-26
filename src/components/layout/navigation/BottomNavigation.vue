@@ -27,7 +27,7 @@ const onFilterPages = (path) => {
       Dashboard
     </v-btn>
 
-    <v-btn v-if="onFilterPages('/system/form')" to="/system/forms">
+    <v-btn v-if="onFilterPages('/system/form')" to="/system/form">
       <v-icon>mdi-tray-arrow-up</v-icon>
       Form
     </v-btn>

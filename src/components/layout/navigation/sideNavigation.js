@@ -11,12 +11,12 @@ export const menuItemsNav1 = [
   ['User Roles', 'mdi-tag-multiple', '', '/manage/user/roles'],
 ]
 export const menuItemsNav2 = [
-  ['Form', 'mdi-form-textarea'],
+  ['Form', 'mdi-form-textarea', '', '/manage/user/roles'],
 ]
 export const menuItemsNav3 = [
-  ['Benefits', 'mdi-tray-arrow-down'],
+  ['Benefits', 'mdi-tray-arrow-down', '', '/manage/user/roles'],
 
 ]
 export const menuItemsNav4 = [
-  ['About', 'mdi-account-box-outline']
+  ['About', 'mdi-account-box-outline', '', '/manage/user/roles']
 ]

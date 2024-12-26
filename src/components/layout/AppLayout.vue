@@ -58,7 +58,7 @@ onMounted(() => {
         </v-app-bar-nav-icon>
 
         <v-app-bar-title>
-          <v-img src="/images/lb-icon.jpg" :width="xs ? '100%' : sm ? '40%' : '14%'"></v-img>
+          <v-img  :width="xs ? '100%' : sm ? '40%' : '14%'"></v-img>
         </v-app-bar-title>
 
         <v-spacer></v-spacer>
