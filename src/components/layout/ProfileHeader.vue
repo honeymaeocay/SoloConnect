@@ -1,8 +1,8 @@
 <script setup>
-import { supabase, formActionDefault } from '@/utils/supabase'
+import { supabase, formActionDefault, getUserInformation } from '@/utils/supabase'
 import { getAvatarText } from '@/utils/helpers'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useAuthUserStore } from '@/stores/authUser'
 
 // Utilize pre-defined vue functions
@@ -13,7 +13,14 @@ const authStore = useAuthUserStore()
 
 // Load Variables
 const formAction = ref({
-  ...formActionDefault
+  ...formActionDefault,
+})
+
+// Load Variables
+const userData = ref({
+  email: '',
+  fullname: '',
+  initials: '',
 })
 
 // Logout Functionality
@@ -35,6 +42,19 @@ const onLogout = async () => {
   }, 2500)
   // Redirect to homepage
   router.replace('/')
+
+  //Getting User Information Functionality
+  const getUser = async () => {
+    const userMetadata = await getUserInformation()
+
+    userData.value.email = userMetadata.email
+    userData.value.fullname = userMetadata.firstname + ' ' + userMetadata.lastname
+    userData.value.initials = getAvatarText(userData.value.fullname)
+  }
+  // Load to Functions during component rendering
+  onMounted(() => {
+    getUser()
+  })
 }
 </script>
 
@@ -52,7 +72,7 @@ const onLogout = async () => {
 
         <v-avatar v-else color="orange-darken-3" size="large">
           <span class="text-h5">
-            {{ getAvatarText(authStore.userData.firstname + ' ' ) }}
+            {{ getAvatarText(authStore.userData.firstname + ' ' + authStore.userData.lastname) }}
           </span>
         </v-avatar>
       </v-btn>
@@ -63,7 +83,7 @@ const onLogout = async () => {
         <v-list>
           <v-list-item
             :subtitle="authStore.userData.email"
-            :title="authStore.userData.firstname + ' '"
+            :title="authStore.userData.firstname + ' ' + authStore.userData.lastname"
           >
             <template #prepend>
               <v-avatar
@@ -77,7 +97,7 @@ const onLogout = async () => {
               <v-avatar v-else color="orange-darken-3" size="large">
                 <span class="text-h5">
                   {{
-                    getAvatarText(authStore.userData.firstname + ' ')
+                    getAvatarText(authStore.userData.firstname + ' ' + authStore.userData.lastname)
                   }}
                 </span>
               </v-avatar>

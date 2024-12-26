@@ -1,6 +1,8 @@
 <script setup>
 import AppLayout from '@/components/layout/AppLayout.vue'
-import SideNavigation from '@/components/layout/navigation/SideNavigation.vue';
+import SideNavigation from '@/components/layout/navigation/SideNavigation.vue'
+import WelcomeWidget from '@/components/system/dashboard/WelcomeWidget.vue'
+
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify'
 
@@ -19,7 +21,11 @@ const isDrawerVisible = ref(mobile.value ? false : true)
       <SideNavigation :is-drawer-visible="isDrawerVisible"></SideNavigation>
     </template>
     <template #content>
-      <v-container></v-container>
+      <v-container fluid>
+        <v-col cols="12" :md="isSuperAdmin ? 7 : false">
+          <WelcomeWidget :theme="theme"></WelcomeWidget>
+        </v-col>
+      </v-container>
     </template>
   </AppLayout>
 </template>

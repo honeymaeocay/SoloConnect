@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+// import { getAvatarText } from './helpers'
 
 // Create a single supabase client for interacting with your database
 export const supabase = createClient(
@@ -24,4 +25,15 @@ export const isAuthenticated = async () => {
   }
 
   return !!data.session
+}
+
+// Retrieve User Information
+export const getUserInformation = async () => {
+  const {
+    data: {
+      user: {user_metadata}
+    }
+  } = await supabase.auth.getUser()
+
+  return user_metadata
 }

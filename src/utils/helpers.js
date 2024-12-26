@@ -51,24 +51,24 @@ export const getAvatarText = (name) => {
 // }
 
 // // 👉 File Extraction of Object, for 1 File/Image
-// export const fileExtract = (event) => {
-//   return new Promise((resolve, reject) => {
-//     const { files } = event.target
+export const fileExtract = (event) => {
+  return new Promise((resolve, reject) => {
+    const { files } = event.target
 
-//     if (!files || !files.length) return reject(new Error('No files selected'))
+    if (!files || !files.length) return reject(new Error('No files selected'))
 
-//     const fileReader = new FileReader()
-//     fileReader.readAsDataURL(files[0])
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(files[0])
 
-//     fileReader.onload = () => {
-//       if (typeof fileReader.result === 'string')
-//         resolve({ fileObject: files[0], fileUrl: fileReader.result })
-//       else reject(new Error('Failed to read file as Data URL'))
-//     }
+    fileReader.onload = () => {
+      if (typeof fileReader.result === 'string')
+        resolve({ fileObject: files[0], fileUrl: fileReader.result })
+      else reject(new Error('Failed to read file as Data URL'))
+    }
 
-//     fileReader.onerror = () => reject(new Error('Error reading file'))
-//   })
-// }
+    fileReader.onerror = () => reject(new Error('Error reading file'))
+  })
+}
 
 // // 👉 File Extraction of Object, for Multiple Files/Images
 // export const filesExtract = (event) => {

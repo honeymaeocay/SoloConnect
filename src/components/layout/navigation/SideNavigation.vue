@@ -69,7 +69,7 @@ onMounted(() => {
       <v-list-item
         prepend-icon="mdi-view-dashboard"
         title="Dashboard"
-        to="/system/dashboard"
+        to="/dashboard"
       ></v-list-item>
 
       <v-divider></v-divider>

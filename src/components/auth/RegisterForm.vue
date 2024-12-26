@@ -45,7 +45,7 @@ const onSubmit = async () => {
     options: {
       data: {
         firstname: formData.value.firstname,
-        lasname: formData.value.lastname,
+        lastname: formData.value.lastname,
         email: formData.value.email
         // is_admin: true, //Just turn to true if admin account
         //role: 'Admin' // if role based
@@ -65,7 +65,7 @@ const onSubmit = async () => {
     // Add success message
     formAction.value.formSuccessMessage = 'Successfully Registered Account'
     // Add here more actions
-    router.replace('/login')
+    router.replace('/dashboard')
   }
 
   // Reset form
