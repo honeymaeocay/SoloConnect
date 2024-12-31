@@ -59,7 +59,7 @@ const router = createRouter({
     },
 
     {
-      path: '/Form',
+      path: '/form',
       name: 'Form',
       component: FormView,
       meta: { requiresAuth: true },
