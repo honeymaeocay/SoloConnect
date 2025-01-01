@@ -8,6 +8,7 @@ import NotFoundView from '@/views/errors/NotFoundView.vue'
 import AccountSettingsView from '@/views/system/AccountSettingsView.vue'
 import BenefitsView from '@/views/system/BenefitsView.vue'
 import FormView from '@/views/system/FormView.vue'
+import AboutView from '@/views/system/AboutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -65,12 +66,12 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
 
-    //{
-    //path: '/About',
-    //name: 'About',
-    //component: AboutView,
-    //meta: { requiresAuth: true },
-    //},
+    {
+      path: '/about',
+      name: 'About',
+      component: AboutView,
+      meta: { requiresAuth: true },
+    },
 
     // Error Pages
     {
