@@ -4,7 +4,6 @@ import AppLayout from '@/components/layout/AppLayout.vue'
 import SideNavigation from '@/components/layout/navigation/SideNavigation.vue'
 import { useDisplay } from 'vuetify'
 
-// Variables and functions from the Composition API
 const { mobile } = useDisplay()
 
 const isDrawerVisible = ref(mobile.value ? false : true)
@@ -18,9 +17,9 @@ const memberTypes = ref([
 ])
 const selectedMemberType = ref('')
 const showForm = ref(false)
-const documentName = ref('')
+const doc_name = ref('')
 const file = ref(null)
-const fileName = ref('')
+const doc_file = ref('')
 const submitted = ref(false)
 
 const openForm = (type) => {
@@ -29,22 +28,34 @@ const openForm = (type) => {
 }
 
 const handleFileUpload = (event) => {
-  file.value = event.target.files[0]
-  fileName.value = file.value ? file.value.name : ''
+  if (event.target.files && event.target.files.length > 0) {
+    file.value = event.target.files[0]
+    doc_file.value = file.value.name
+    console.log('File Object:', file.value)
+    console.log('File Name:', doc_file.value)
+  } else {
+    console.log('No file selected')
+    file.value = null
+    doc_file.value = ''
+  }
 }
 
 const submitForm = () => {
-  if (documentName.value && file.value) {
+  console.log('Document Name:', doc_name.value)
+  console.log('File Name:', doc_file.value)
+  if (doc_name.value && file.value) {
     submitted.value = true
     closeForm()
+  } else {
+    alert('Please fill out all fields.')
   }
 }
 
 const closeForm = () => {
   showForm.value = false
-  documentName.value = ''
+  doc_name.value = ''
   file.value = null
-  fileName.value = ''
+  doc_file.value = ''
 }
 </script>
 
@@ -60,7 +71,6 @@ const closeForm = () => {
     <template #content>
       <div>
         <h2 class="text-center">Solo Parent Requirements</h2>
-        <!-- Cards for Each Member Type -->
         <div class="d-flex flex-wrap ga-5 mt-5">
           <div
             v-for="type in memberTypes"
@@ -74,7 +84,6 @@ const closeForm = () => {
           </div>
         </div>
 
-        <!-- Conditional Form Display -->
         <div v-if="showForm" class="modal">
           <div class="modal-content">
             <h3>Upload Requirement for: {{ selectedMemberType }}</h3>
@@ -84,7 +93,7 @@ const closeForm = () => {
                 <input
                   type="text"
                   id="docName"
-                  v-model="documentName"
+                  v-model="doc_name"
                   placeholder="Enter document name"
                   required
                 />
@@ -101,12 +110,11 @@ const closeForm = () => {
           </div>
         </div>
 
-        <!-- Display Uploaded Document -->
         <div v-if="submitted" class="uploaded-doc">
           <h3>Uploaded Document</h3>
           <p><strong>Member Type:</strong> {{ selectedMemberType }}</p>
-          <p><strong>Name:</strong> {{ documentName }}</p>
-          <p><strong>File:</strong> {{ fileName }}</p>
+          <p><strong>Name:</strong> {{ doc_name || 'No name provided' }}</p>
+          <p><strong>File:</strong> {{ doc_file || 'No file uploaded' }}</p>
         </div>
       </div>
     </template>
