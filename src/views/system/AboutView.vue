@@ -22,11 +22,11 @@ const isDrawerVisible = ref(mobile.value ? false : true)
 
     <template #content>
       <div class="about-container mx-16">
-        <header class="text-center py-5 bg-primary text-white rounded border-md">
+        <header class="text-center py-5 bg-primary text-white rounded border-md shadow-lg">
           <h1>SoloConnect</h1>
         </header>
         <div class="content mt-5">
-          <div class="d-flex justify-center mb-4 bg-surface-variant rounded-t-lg">
+          <div class="d-flex justify-center mb-4 bg-surface-variant rounded-t-lg shadow-lg">
             <img src="/src/assets/Cityhall.jpg" alt="Building" class="w-75 rounded-lg shadow-lg" />
           </div>
           <h2 class="text-center mt-4 text-white bg-orange-darken-2 py-3 rounded-lg shadow-md">
@@ -41,7 +41,7 @@ const isDrawerVisible = ref(mobile.value ? false : true)
                   <v-hover>
                     <template #default="{ isHovering, props }">
                       <v-card
-                        class="mx-auto my-3"
+                        class="mx-auto my-3 hover-card"
                         max-width="1000"
                         v-bind="props"
                         :color="isHovering ? 'orange lighten-2' : 'white'"
@@ -65,7 +65,7 @@ const isDrawerVisible = ref(mobile.value ? false : true)
                   <v-hover>
                     <template #default="{ isHovering, props }">
                       <v-card
-                        class="mx-auto my-3"
+                        class="mx-auto my-3 hover-card"
                         max-width="1000"
                         v-bind="props"
                         :color="isHovering ? 'orange lighten-2' : 'white'"
@@ -92,19 +92,24 @@ const isDrawerVisible = ref(mobile.value ? false : true)
   </AppLayout>
 </template>
 
-<style scoped>
+v<style scoped>
 .about-container {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 header {
   background-color: #1976d2;
   color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   background-color: #ff9800;
   color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .mission-vision {
@@ -112,10 +117,20 @@ h2 {
 }
 
 .v-card {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .v-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.hover-card {
+  border-radius: 8px;
+}
+
+img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 </style>

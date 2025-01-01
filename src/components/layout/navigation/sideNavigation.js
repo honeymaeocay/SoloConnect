@@ -7,7 +7,7 @@ export const mainNav = [
 ]
 
 // 👉 Sub Navigations; Title, Icon, Subtitle, Redirect Path
-export const menuItemsNav1 = [['User Roles', 'mdi-tag-multiple', '', '/manage/user/roles']]
+// export const menuItemsNav1 = [['User Roles', 'mdi-tag-multiple', '', '/manage/user/roles']]
 export const menuItemsNav2 = [['Form', 'mdi-form-textarea', '', '/form']]
 export const menuItemsNav3 = [['Benefits', 'mdi-tray-arrow-down', '', '/benefits']]
 export const menuItemsNav4 = [['About', 'mdi-account-box-outline', '', '/about']]
