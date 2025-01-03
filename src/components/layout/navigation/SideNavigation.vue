@@ -1,7 +1,7 @@
 <script setup>
 import {
   mainNav,
-  menuItemsNav1,
+  // menuItemsNav1,
   menuItemsNav2,
   menuItemsNav3,
   menuItemsNav4
@@ -20,7 +20,7 @@ const authStore = useAuthUserStore()
 
 // Load Variables
 const noAccessPages = ref([])
-const editableMenuItemsNav1 = ref([...menuItemsNav1])
+// const editableMenuItemsNav1 = ref([...menuItemsNav1])
 const editableMenuItemsNav2 = ref([...menuItemsNav2])
 const editableMenuItemsNav3 = ref([...menuItemsNav3])
 const editableMenuItemsNav4 = ref([...menuItemsNav4])
@@ -39,7 +39,7 @@ const onFilterPages = async () => {
   if (authStore.userRole === 'Super Administrator') return
 
   const menuItems = [
-    { items: editableMenuItemsNav1, title: mainNav[0][0] },
+    // { items: editableMenuItemsNav1, title: mainNav[0][0] },
     { items: editableMenuItemsNav2, title: mainNav[1][0] },
     { items: editableMenuItemsNav3, title: mainNav[2][0] },
     { items: editableMenuItemsNav4, title: mainNav[3][0] },
