@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from '@/components/layout/AppLayout.vue'
 import SideNavigation from '@/components/layout/navigation/SideNavigation.vue'
-import PictureForm from '@/components/system/account-settings/PictureForm.vue'
+// import PictureForm from '@/components/system/account-settings/PictureForm.vue'
 import ProfileForm from '@/components/system/account-settings/ProfileForm.vue'
 import PasswordForm from '@/components/system/account-settings/PasswordForm.vue'
 import { useAuthUserStore } from '@/stores/authUser'
@@ -82,11 +82,11 @@ const isDrawerVisible = ref(mobile.value ? false : true)
           </v-col>
 
           <v-col cols="12" lg="8">
-            <v-card class="mb-5" title="Profile Picture">
+            <!-- <v-card class="mb-5" title="Profile Picture">
               <v-card-text>
                 <PictureForm></PictureForm>
               </v-card-text>
-            </v-card>
+            </v-card> -->
 
             <v-card class="mb-5" title="Profile Information">
               <v-card-text>
