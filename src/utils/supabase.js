@@ -37,3 +37,22 @@ export const getUserInformation = async () => {
 
   return user_metadata
 }
+
+
+// // Benefits part
+// export const fetchBenefits = async () => {
+//   const { data, error } = await supabase.from('user_benefits').select('*')
+//   if (error) {
+//     console.error('Error fetching benefits:', error.message)
+//     return []
+//   }
+//   return data
+// }
+
+// export const addBenefit = async (benefit) => {
+//   const { data, error } = await supabase.from('user_benefits').insert([benefit])
+//   if (error) {
+//     console.error('Error adding benefit:', error.message)
+//   }
+//   return data
+// }

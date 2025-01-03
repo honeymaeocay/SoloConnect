@@ -1,17 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { supabase } from '@/utils/supabase'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import SideNavigation from '@/components/layout/navigation/SideNavigation.vue'
-import { useDisplay } from 'vuetify'
-import { createClient } from '@supabase/supabase-js'
 
-const { mobile } = useDisplay()
-
-const supabaseUrl = 'https://nlonihutiayrrvrzhovn.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sb25paHV0aWF5cnJ2cnpob3ZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE0ODE4ODcsImV4cCI6MjA0NzA1Nzg4N30.1nBbAvPIim88YnquklD5PxhXn_87MoPcTWOIX5SYFFg'
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-const isDrawerVisible = ref(mobile.value ? false : true)
 const memberTypes = ref([
   'Death of spouse',
   'Birth from rape',
@@ -47,31 +39,79 @@ const handleFileUpload = (event) => {
 }
 
 const submitForm = async () => {
-  console.log('Document Name:', doc_name.value)
-  console.log('File Name:', doc_file.value)
-  if (doc_name.value && file.value) {
-    const { data, error } = await supabase.storage
-      .from('documents') // Ensure this is the correct bucket name
-      .upload(`documents/${file.value.name}`, file.value)
-
-    if (error) {
-      console.error('Error uploading file:', error.message)
-      alert(`Error uploading file: ${error.message}`)
-      return
-    }
-
-    console.log('File uploaded:', data)
-    history.value.push({
-      memberType: selectedMemberType.value,
-      docName: doc_name.value,
-      fileName: doc_file.value,
-      timestamp: new Date().toLocaleString()
-    })
-    submitted.value = true
-    showForm.value = false
-  } else {
+  if (!doc_name.value || !file.value) {
     alert('Please fill out all fields.')
+    return
   }
+
+  // Upload the file to Supabase storage
+  const { data: uploadData, error: uploadError } = await supabase.storage
+    .from('documents') // Ensure this is the correct bucket name
+    .upload(`${file.value.name}`, file.value)
+
+  if (uploadError) {
+    console.error('Error uploading file:', uploadError.message)
+    alert(`Error uploading file: ${uploadError.message}`)
+    return
+  }
+
+  console.log('File uploaded:', uploadData)
+
+  // Insert data into the forms table
+  const { data: data1, error: error1 } = await supabase
+    .from('forms')
+    .insert([
+      { doc_name: doc_name.value, doc_file: uploadData.path, member_type: selectedMemberType.value }
+    ])
+    .select()
+
+  if (error1) {
+    console.error('Error inserting data into forms table:', error1.message)
+    alert(`Error inserting data into forms table: ${error1.message}`)
+    return
+  }
+
+  console.log('Data inserted successfully into forms table:', data1)
+
+  // Retrieve the authenticated user's ID
+  const { data: userData, error: userError } = await supabase.auth.getUser()
+  if (userError) {
+    console.error('Error getting user:', userError.message)
+    alert(`Error getting user: ${userError.message}`)
+    return
+  }
+  const userId = userData.user.id
+
+  // Insert data into the documents table with user_id
+  const { data: data2, error: error2 } = await supabase
+    .from('documents') // Replace with your actual second table name
+    .insert([
+      { doc_name: doc_name.value, doc_file: uploadData.path, member_type: selectedMemberType.value, user_id: userId }
+    ])
+    .select()
+
+  if (error2) {
+    console.error('Error inserting data into documents table:', error2.message)
+    alert(`Error inserting data into documents table: ${error2.message}`)
+    return
+  }
+
+  console.log('Data inserted successfully into documents table:', data2)
+
+  // Add to history
+  history.value.push({
+    memberType: selectedMemberType.value,
+    docName: doc_name.value,
+    fileName: file.value.name,
+    timestamp: new Date().toLocaleString()
+  })
+
+  // Reset form fields
+  doc_name.value = ''
+  file.value = null
+  doc_file.value = ''
+  submitted.value = true
+  showForm.value = false
 }
 
 const closeForm = () => {
@@ -81,6 +121,7 @@ const closeForm = () => {
   doc_file.value = ''
 }
 </script>
+
 <template>
   <AppLayout
     :is-with-app-bar-nav-icon="true"
@@ -192,9 +233,9 @@ const closeForm = () => {
               style="background: #e8f5e9; border-left: 5px solid #4CAF50;"
             >
               <h3 style="color: #388E3C;">Document Uploaded Successfully</h3>
-              <p><strong>Member Type:</strong> {{ selectedMemberType }}</p>
+              <!-- <p><strong>Member Type:</strong> {{ selectedMemberType }}</p>
               <p><strong>Document Name:</strong> {{ doc_name || 'No name provided' }}</p>
-              <p><strong>File:</strong> {{ doc_file || 'No file uploaded' }}</p>
+              <p><strong>File:</strong> {{ doc_file || 'No file uploaded' }}</p> -->
             </v-alert>
           </v-col>
         </v-row>
@@ -235,7 +276,6 @@ const closeForm = () => {
     </template>
   </AppLayout>
 </template>
-
 
 <style scoped>
 .text-center {
